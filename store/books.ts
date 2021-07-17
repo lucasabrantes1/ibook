@@ -1,43 +1,43 @@
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
-import { Book } from '@/models'
 import { $axios } from '@/utils/nuxt-instance'
+import { Book } from '@/models'
 
 interface Show {
-  id: Book['id']
+  id: number
 }
 
-@Module({name: 'books', stateFactory: true, namespaced: true})
+@Module({ name: 'books', stateFactory: true, namespaced: true })
 export default class Books extends VuexModule {
   private books = [] as Book[]
-  private book = {} as Book
+  private singleBook = {} as Book
 
-  public get $all(){
+  public get $all() {
     return this.books
   }
 
-  public get $single(){
-    return this.book
+  public get $single() {
+    return this.singleBook
   }
 
   @Mutation
-  private SET_ALL(books: Book[]){
+  private SET_BOOKS(books: Book[]) {
     this.books = books
   }
 
   @Mutation
-  private SET_SINGLE(book: Book){
-    this.book = book
+  private SET_SINGLE_BOOK(book: Book) {
+    this.singleBook = book
   }
 
   @Action
-  public async index(){
+  public async index() {
     const books = await $axios.$get('/books')
-    this.context.commit('SET_ALL', books)
+    this.context.commit('SET_BOOKS', books)
   }
 
   @Action
-  public async show({id}: Show){
+  async show({ id }: Show) {
     const book = await $axios.$get(`/books/${id}`)
-    this.context.commit('SET_SINGLE', book)
+    this.context.commit('SET_SINGLE_BOOK', book)
   }
 }

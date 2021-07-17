@@ -6,14 +6,14 @@ module.exports = {
   },
   extends: [
     '@nuxtjs/eslint-config-typescript',
-    'plugin:nuxt/recommended',
-    'prettier'
+    'prettier',
+    'prettier/vue',
+    'plugin:prettier/recommended',
+    'plugin:nuxt/recommended'
   ],
-  plugins: [
-  ],
-  // add your custom rules here
+  plugins: ['prettier'],
   rules: {
-    'no-console': 'off',
-    'vue/no-v-html': 'off'
+    'vue/no-v-html': 'off',
+    'no-console': 'off'
   }
 }
