@@ -5,23 +5,19 @@ import { $axios } from '~/utils/nuxt-instance'
 @Module({name: 'books', stateFactory: true, namespaced: true})
 export default class Books extends VuexModule {
 
-  private count = 0
-
-   public get $count(){
-    return this.count
-  }
-
-
-  @Mutation
-  private INCREMENT(number: number){
-    this.count += number
-  }
+  @Action
+  public async index()  {}
 
   @Action
-  public increment(){
-      this.context.commit('INCREMENT',5)
-  }
+  public async create()  {}
 
+  @Action
+  public async show()  {}
 
+  @Action
+  public async update()  {}
+
+  @Action
+  public async destroy()  {}
 
 }
